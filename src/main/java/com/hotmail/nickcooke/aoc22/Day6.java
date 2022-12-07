@@ -26,13 +26,12 @@ public class Day6 extends AoCSolution {
 
     private int getCharactersProcessedBeforeFirstMarker(String signal, int uniqueCharactersInMarker) {
         char[] characters = signal.toCharArray();
-        Set<Character> marker = new HashSet<>();
         for (int i = 0; i < characters.length; i++) {
-            marker.clear();
+            Set<Character> potentialMarker = new HashSet<>();
             for (int j = 0; j < uniqueCharactersInMarker; j++) {
-                marker.add(characters[i + j]);
+                potentialMarker.add(characters[i + j]);
             }
-            if (marker.size() == uniqueCharactersInMarker) {
+            if (potentialMarker.size() == uniqueCharactersInMarker) {
                 return i + uniqueCharactersInMarker;
             }
         }
