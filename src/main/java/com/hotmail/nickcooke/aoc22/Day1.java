@@ -27,6 +27,7 @@ public class Day1 extends AoCSolution {
         }
         maxCalories = Math.max(currentCalories, maxCalories);
         System.out.println("Most calories carried is " + maxCalories);
+        assert maxCalories==68467;
     }
 
     @Override
@@ -46,5 +47,6 @@ public class Day1 extends AoCSolution {
         Collections.reverse(elfCalories);
         int topThree = elfCalories.get(0) + elfCalories.get(1) + elfCalories.get(2);
         System.out.println("Top three: " + topThree);
+        assert topThree==203420;
     }
 }
