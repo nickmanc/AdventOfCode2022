@@ -21,17 +21,13 @@ public class Day10 {
         int signalStrength = 0;
         char[][] crt = new char[6][40];
         while (!instructions.isEmpty() || runningInstruction != "") {
-            if ((cycle - 1) % 40 >= x - 1 && (cycle - 1) % 40 <= x + 1) {
-                crt[(cycle - 1) / 40][(cycle - 1) % 40] = '@';
-            } else {
-                crt[(cycle - 1) / 40][(cycle - 1) % 40] = ' ';
-            }
-            if ((cycle - 20) % 40 == 0) {
+            crt[(cycle - 1) / 40][(cycle - 1) % 40] = pixelIsLit(cycle, x) ? '#' : '.';
+            if (shouldMeasureSignalStrenth(cycle)) {
                 signalStrength += cycle * x;
             }
             if (runningInstruction.equals("") && !instructions.isEmpty()) {
                 runningInstruction = instructions.poll();
-                runningInstruction = runningInstruction.equals("noop")?"":runningInstruction;
+                runningInstruction = runningInstruction.equals("noop") ? "" : runningInstruction;
             } else if (!instructions.isEmpty()) {
                 x += Integer.parseInt(runningInstruction.split(" ")[1]);
                 runningInstruction = "";
@@ -42,6 +38,14 @@ public class Day10 {
         System.out.println();
         System.out.println("Part 2:");
         printCrt(crt);
+    }
+
+    private static boolean shouldMeasureSignalStrenth(int cycle) {
+        return (cycle - 20) % 40 == 0;
+    }
+
+    private boolean pixelIsLit(int cycle, int x) {
+        return (cycle - 1) % 40 >= x - 1 && (cycle - 1) % 40 <= x + 1;
     }
 
     private Queue<String> getInstructions() throws IOException {
