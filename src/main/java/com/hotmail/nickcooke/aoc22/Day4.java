@@ -8,8 +8,8 @@ public class Day4 extends AoCSolution {
     public static void main(String[] args) {
         Day4 day4 = new Day4();
         day4.getInput();
-        day4.part1();
-        day4.part2();
+        day4.part1Timed();
+        day4.part2Timed();
     }
 
     @Override

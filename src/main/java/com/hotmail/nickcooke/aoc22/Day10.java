@@ -20,12 +20,12 @@ public class Day10 {
         int cycle = 1;
         int signalStrength = 0;
         char[][] crt = new char[6][40];
-        while (!instructions.isEmpty() || runningInstruction != "") {
+        while (!instructions.isEmpty() || !runningInstruction.isEmpty()) {
             crt[(cycle - 1) / 40][(cycle - 1) % 40] = pixelIsLit(cycle, x) ? '#' : '.';
-            if (shouldMeasureSignalStrenth(cycle)) {
+            if (shouldMeasureSignalStrength(cycle)) {
                 signalStrength += cycle * x;
             }
-            if (runningInstruction.equals("") && !instructions.isEmpty()) {
+            if (runningInstruction.isEmpty())  {
                 runningInstruction = instructions.poll();
                 runningInstruction = runningInstruction.equals("noop") ? "" : runningInstruction;
             } else if (!instructions.isEmpty()) {
@@ -40,7 +40,7 @@ public class Day10 {
         printCrt(crt);
     }
 
-    private static boolean shouldMeasureSignalStrenth(int cycle) {
+    private static boolean shouldMeasureSignalStrength(int cycle) {
         return (cycle - 20) % 40 == 0;
     }
 

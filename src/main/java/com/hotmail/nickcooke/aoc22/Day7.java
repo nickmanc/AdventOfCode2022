@@ -11,8 +11,8 @@ public class Day7 extends AoCSolution {
     public static void main(String[] args) {
         Day7 day7 = new Day7();
         day7.getInput();
-        day7.part1();
-        day7.part2();
+        day7.part1Timed();
+        day7.part2Timed();
     }
 
     @Override
@@ -25,7 +25,6 @@ public class Day7 extends AoCSolution {
             }
         }
         System.out.println("Part 1: " + totalLargeDirectoriesSize);
-        assert totalLargeDirectoriesSize == 1423358;
     }
 
     @Override
@@ -39,7 +38,6 @@ public class Day7 extends AoCSolution {
             }
         }
         System.out.println("Part 2: " + smallestBigEnoughDirectorySize);
-        assert smallestBigEnoughDirectorySize == 545729;
     }
 
     private List<File> parseInput(List<String> inputLines) {
@@ -52,12 +50,10 @@ public class Day7 extends AoCSolution {
                 String changeDirectoryName = line.replace("$ cd ", "");
                 File newDirectory = new File(changeDirectoryName, currentDirectory);
                 directories.add(newDirectory);
-                if (null == currentDirectory) {
-                    currentDirectory = newDirectory;
-                } else {
+                if (null != currentDirectory) {
                     currentDirectory.addChild(newDirectory);
-                    currentDirectory = newDirectory;
                 }
+                currentDirectory = newDirectory;
             } else if (line.matches("\\d+ .*")) {
                 File newFile = new File(line.split(" ")[1], Integer.parseInt(line.split(" ")[0]), currentDirectory);
                 currentDirectory.addChild(newFile);
@@ -70,7 +66,7 @@ public class Day7 extends AoCSolution {
         return directories;
     }
 
-    class File {
+    static class File {
         int size;
         String name;
         List<File> children = new ArrayList<>();

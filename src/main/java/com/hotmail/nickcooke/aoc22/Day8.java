@@ -7,8 +7,8 @@ public class Day8 extends AoCSolution {
     public static void main(String[] args) {
         Day8 day8 = new Day8();
         day8.getInput();
-        day8.part1();
-        day8.part2();
+        day8.part1Timed();
+        day8.part2Timed();
     }
 
     @Override
@@ -16,7 +16,6 @@ public class Day8 extends AoCSolution {
         int[][] treeGrid = parseGrid(inputLines);
         int visibleTrees = calculateVisibleTrees(treeGrid);
         System.out.println("Part 1: " + (visibleTrees));
-        assert visibleTrees == 1807;
     }
 
 
@@ -25,7 +24,6 @@ public class Day8 extends AoCSolution {
         int[][] treeGrid = parseGrid(inputLines);
         int mostViewableTrees = calculateMostViewableTrees(treeGrid);
         System.out.println("Part 2: " + (mostViewableTrees));
-        assert mostViewableTrees == 480000;
     }
 
     private int calculateMostViewableTrees(int[][] treeGrid) {
@@ -126,9 +124,9 @@ public class Day8 extends AoCSolution {
     }
 
     private void printGrid(int[][] treeGrid) {
-        for (int i = 0; i < treeGrid.length; i++) {
+        for (int[] ints : treeGrid) {
             for (int j = 0; j < treeGrid[0].length; j++) {
-                System.out.print(treeGrid[i][j]);
+                System.out.print(ints[j]);
             }
             System.out.println();
         }

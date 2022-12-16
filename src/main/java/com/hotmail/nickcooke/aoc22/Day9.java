@@ -7,22 +7,20 @@ public class Day9 extends AoCSolution {
     public static void main(String[] args) {
         Day9 day9 = new Day9();
         day9.getInput();
-        day9.part1();
-        day9.part2();
+        day9.part1Timed();
+        day9.part2Timed();
     }
 
     @Override
     void part1() {
         int tailPositionCount = calculateTailPositions(2);
         System.out.println("Part 1: " + tailPositionCount);
-        assert tailPositionCount == 6026;
     }
 
     @Override
     void part2() {
         int tailPositionCount = calculateTailPositions(10);
         System.out.println("Part 2: " + tailPositionCount);
-        assert tailPositionCount == 2273;
     }
 
     private int calculateTailPositions(int numberOfKnots) {
@@ -52,26 +50,17 @@ public class Day9 extends AoCSolution {
         int steps = Integer.parseInt(line.split(" ")[1]);
         for (int stepCount = 0; stepCount < steps; stepCount++) {
             switch (move) {
-                case "U":
-                    head.moveUp();
-                    break;
-                case "R":
-                    head.moveRight();
-                    break;
-                case "L":
-                    head.moveLeft();
-                    break;
-                case "D":
-                    head.moveDown();
-                    break;
-                default:
-                    throw new RuntimeException("Unexpected Move");
+                case "U" -> head.moveUp();
+                case "R" -> head.moveRight();
+                case "L" -> head.moveLeft();
+                case "D" -> head.moveDown();
+                default -> throw new RuntimeException("Unexpected Move");
             }
         }
     }
 
 
-    class Position {
+    static class Position {
         int x;
         int y;
 

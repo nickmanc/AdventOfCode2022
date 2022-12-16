@@ -11,22 +11,20 @@ public class Day11 extends AoCSolution {
     public static void main(String[] args) {
         Day11 day11 = new Day11();
         day11.getInput();
-        day11.part1();
-        day11.part2();
+        day11.part1Timed();
+        day11.part2Timed();
     }
 
     @Override
     void part1() {
         long monkeyBusiness = solve(20);
         System.out.println("Part 1: " + monkeyBusiness);
-        assert monkeyBusiness == 54253;
     }
 
     @Override
     void part2() {
         long monkeyBusiness = solve(10_000, true);
         System.out.println("Part 2: " + monkeyBusiness);
-        assert monkeyBusiness == 13119526120L;
     }
 
     long solve(int numberOfRounds) {
@@ -62,7 +60,7 @@ public class Day11 extends AoCSolution {
             Monkey monkey = monkeys.get(monkeyIndex);
             monkey.index = monkeyIndex;
             String items = inputLines.get(i + 1).replace("Starting items: ", "");
-            monkey.itemWorryLevels = Arrays.stream(items.split(", ")).map(s -> s.trim()).map(Long::parseLong).collect(Collectors.toList());
+            monkey.itemWorryLevels = Arrays.stream(items.split(", ")).map(String::trim).map(Long::parseLong).collect(Collectors.toList());
             String operation = inputLines.get(i + 2);
             if (operation.contains("old * old")) {
                 monkey.operationType = OperationType.SQUARE;
@@ -82,14 +80,12 @@ public class Day11 extends AoCSolution {
         return monkeys;
     }
 
-    class Monkey {
+    static class Monkey {
         List<Long> itemWorryLevels = new ArrayList<>();
         OperationType operationType;
-
         long operationValue;
         long testValue;
         int index;
-
         long inspectedItemsCount = 0;
         Monkey trueMonkey;
         Monkey falseMonkey;

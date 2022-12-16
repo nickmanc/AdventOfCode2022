@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class AoCSolution {
 
@@ -23,4 +22,15 @@ public abstract class AoCSolution {
 
     abstract void part1();
     abstract void part2();
+
+    void part1Timed(){
+        long startTime = System.currentTimeMillis();
+        part1();
+        System.out.println("Part 1 took " + (System.currentTimeMillis() - startTime) + " ms");
+    }
+    void part2Timed(){
+        long startTime = System.currentTimeMillis();
+        part2();
+        System.out.println("Part 2 took " + (System.currentTimeMillis() - startTime) + " ms");
+    }
 }

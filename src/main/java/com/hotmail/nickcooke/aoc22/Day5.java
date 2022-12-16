@@ -11,8 +11,8 @@ public class Day5 extends AoCSolution {
     public static void main(String[] args) {
         Day5 day5 = new Day5();
         day5.getInput();
-        day5.part1();
-        day5.part2();
+        day5.part1Timed();
+        day5.part2Timed();
     }
 
     Pattern crateMovePattern = Pattern.compile("move (\\d+) from (\\d+) to (\\d+)");
@@ -25,13 +25,14 @@ public class Day5 extends AoCSolution {
         for (String inputLine : inputLines) {
             if (inputLine.matches(crateMovePattern.pattern())) {
                 Matcher m = crateMovePattern.matcher(inputLine);
-                m.matches();
-                int numberOfCratesToMove = Integer.parseInt(m.group(1));
-                Stack moveFromStack = stacks.get(Integer.parseInt(m.group(2)) - 1);
-                Stack moveToStack = stacks.get(Integer.parseInt(m.group(3)) - 1);
-                for (int i = 1; i <= numberOfCratesToMove; i++) {
-                    char crate = (char) moveFromStack.pop();
-                    moveToStack.push(crate);
+                if (m.matches()) {
+                    int numberOfCratesToMove = Integer.parseInt(m.group(1));
+                    Stack<Character> moveFromStack = stacks.get(Integer.parseInt(m.group(2)) - 1);
+                    Stack<Character> moveToStack = stacks.get(Integer.parseInt(m.group(3)) - 1);
+                    for (int i = 1; i <= numberOfCratesToMove; i++) {
+                        char crate = moveFromStack.pop();
+                        moveToStack.push(crate);
+                    }
                 }
             }
         }
@@ -45,17 +46,18 @@ public class Day5 extends AoCSolution {
         for (String inputLine : inputLines) {
             if (inputLine.matches(crateMovePattern.pattern())) {
                 Matcher m = crateMovePattern.matcher(inputLine);
-                m.matches();
-                int numberOfCratesToMove = Integer.parseInt(m.group(1));
-                Stack<Character> moveFromStack = stacks.get(Integer.parseInt(m.group(2)) - 1);
-                Stack<Character> moveToStack = stacks.get(Integer.parseInt(m.group(3)) - 1);
-                Stack<Character> tempStack = new Stack<>();
-                for (int i = 1; i <= numberOfCratesToMove; i++) {
-                    char crate = (char) moveFromStack.pop();
-                    tempStack.push(crate);
-                }
-                while (!tempStack.isEmpty()) {
-                    moveToStack.push(tempStack.pop());
+                if (m.matches()) {
+                    int numberOfCratesToMove = Integer.parseInt(m.group(1));
+                    Stack<Character> moveFromStack = stacks.get(Integer.parseInt(m.group(2)) - 1);
+                    Stack<Character> moveToStack = stacks.get(Integer.parseInt(m.group(3)) - 1);
+                    Stack<Character> tempStack = new Stack<>();
+                    for (int i = 1; i <= numberOfCratesToMove; i++) {
+                        char crate = moveFromStack.pop();
+                        tempStack.push(crate);
+                    }
+                    while (!tempStack.isEmpty()) {
+                        moveToStack.push(tempStack.pop());
+                    }
                 }
             }
         }
@@ -66,7 +68,7 @@ public class Day5 extends AoCSolution {
         int numberOfStacks = (inputLines.get(0).length() + 1) / 4;
         List<Stack<Character>> stacks = new ArrayList<>();
         for (int i = 0; i < numberOfStacks; i++) {
-            stacks.add(new Stack<Character>());
+            stacks.add(new Stack<>());
         }
 
         for (int i = stackLabelLine - 1; i >= 0; i--) {
@@ -89,15 +91,15 @@ public class Day5 extends AoCSolution {
     }
 
     private String getTopCrates(List<Stack<Character>> stacks) {
-        String topStacks = "";
-        for (Stack stack : stacks) {
-            topStacks += stack.pop();
+        StringBuilder topStacks = new StringBuilder();
+        for (Stack<Character> stack : stacks) {
+            topStacks.append(stack.pop());
         }
-        return topStacks;
+        return topStacks.toString();
     }
 
     private void printStacks(List<Stack<Character>> stacks) {
-        for (Stack stack : stacks) {
+        for (Stack<Character> stack : stacks) {
             System.out.println(stack);
         }
         System.out.println("================");

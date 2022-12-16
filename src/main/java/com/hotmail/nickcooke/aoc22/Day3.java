@@ -5,8 +5,8 @@ public class Day3 extends AoCSolution {
     public static void main(String[] args) {
         Day3 day3 = new Day3();
         day3.getInput();
-        day3.part1();
-        day3.part2();
+        day3.part1Timed();
+        day3.part2Timed();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Day3 extends AoCSolution {
     }
 
     private int getPriorityOfCommonItem(String bag) {
-        int asciiValue = (int) getCommonItem(bag);
+        int asciiValue = getCommonItem(bag);
         return getPriorityOfItem(asciiValue);
     }
 
@@ -54,8 +54,7 @@ public class Day3 extends AoCSolution {
             String bag3 = inputLines.get(i + 2);
             for (char letter : bag1.toCharArray()) {
                 if (bag2.indexOf(letter) > -1 && bag3.indexOf(letter) > -1) {
-                    System.out.println("letter: " + letter);
-                    badgeTotals += getPriorityOfItem((int) letter);
+                    badgeTotals += getPriorityOfItem(letter);
                     break;
                 }
             }
